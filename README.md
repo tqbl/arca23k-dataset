@@ -1,2 +1,3 @@
-# arca23k-dataset
-All the necessary code for creating the ARCA23K dataset
+# ARCA23K
+
+The code will be available soon -- possibly after acceptance of the accompanying paper.
