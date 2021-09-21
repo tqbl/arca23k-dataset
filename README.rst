@@ -4,7 +4,7 @@ ARCA23K
 This is the software used to create the ARCA23K and ARCA23K-FSD
 datasets. A description of these datasets can be found on the `Zenodo
 page`__. Details of how the datasets were created can be found in our
-DCASE2021 workshop paper (to appear soon).
+`DCASE2021 workshop paper`__ [1]_.
 
 Due to the mutable nature of the Freesound database (the source of the
 audio data), this software is unlikely to reproduce ARCA23K and
@@ -14,6 +14,7 @@ can be used as a reference.
 The baseline system used to run experiments will be released soon.
 
 __ https://zenodo.org/record/5117901
+__ https://arxiv.org/abs/2109.09227
 
 
 .. contents::
@@ -41,8 +42,8 @@ Configuration
 -------------
 
 Some of the scripts require access to the Freesound API. To use the API,
-you need access credentials, which you can `apply`__ for. Once you have
-a client ID and a client secret key, you need to add these credentials
+access credentials are required, which can be applied for `here`__. Once
+a client ID and a client secret key are obtained, they need to be added
 to the `client.json`__ file. An access token is also needed to download
 clips from Freesound. To obtain an access token, follow the instructions
 given `here`__. Note that an access token is only valid for 24 hours.
@@ -81,7 +82,7 @@ This software provides six scripts:
    from Freesound. The clips that are downloaded depend on the results
    of the previous script.
 5. ``src/convert_audio.py``: Converts the downloaded Freesound clips to
-   16-bit mono WAV files sampled at 44.1 kHz.
+   mono 16-bit 44.1 kHz WAV files.
 6. ``src/curate_datasets.py``: Creates the final ground truth data for
    ARCA23K and ARCA23K-FSD.
 
@@ -99,3 +100,23 @@ __ src/extern/freesound.py
 __ https://github.com/MTG/freesound-datasets
 __ metadata/ontology.json
 __ https://github.com/audioset/ontology
+
+
+Citing
+------
+
+If you wish to cite this work, please cite the following paper:
+
+.. [1] \T. Iqbal, Y. Cao, A. Bailey, M. D. Plumbley, and W. Wang,
+       "ARCA23K: An audio dataset for investigating open-set label
+       noise," arXiv preprint arXiv:2109.09227, September 2021
+
+BibTeX::
+
+    @article{Iqbal2021,
+        author = {Iqbal, Turab and Cao, Yin and Bailey, Andrew and Plumbley, Mark D. and Wang, Wenwu},
+        title = {ARCA23K: An audio dataset for investigating open-set label noise},
+        journal = {arXiv preprint arXiv:2109.09227},
+        year = {2021},
+        month = {September},
+    }
