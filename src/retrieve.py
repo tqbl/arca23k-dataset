@@ -51,7 +51,9 @@ def main(args):
 
     if args.evaluate:
         pd.options.display.max_rows = 100
-        print(evaluate(results, subset))
+        scores = evaluate(results, subset)
+        scores.to_csv(args.work_dir / 'retrieval_scores.csv')
+        print(scores)
     else:
         # Discard classes that lack a sufficient number of matches
         sizes = results.groupby('prediction').size()
