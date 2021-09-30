@@ -3,7 +3,7 @@ name = "arca23k-dataset"
 version = "0.1.0"
 description = "The code used to create the ARCA23K and ARCA23K-FSD datasets"
 authors = ["Turab Iqbal <t.iqbal@surrey.ac.uk>"]
-license = "ISC"
+license = "AGPL-3.0-or-later"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
