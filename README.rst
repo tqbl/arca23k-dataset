@@ -4,12 +4,12 @@ ARCA23K
 This is the software used to create the ARCA23K and ARCA23K-FSD
 datasets. A description of these datasets can be found on the `Zenodo
 page`__. Details of how the datasets were created can be found in our
-`DCASE2021 workshop paper`__ [1]_.
+`DCASE2021 paper`__ [1]_.
 
 Due to the mutable nature of the Freesound database (the source of the
 audio data), this software is unlikely to reproduce ARCA23K and
-ARCA23K-FSD exactly. However, in releasing this code, we hope that it
-can be used as a reference.
+ARCA23K-FSD exactly. Nevertheless, we hope this code can serve as a
+useful reference.
 
 The baseline system used to run experiments will be released soon.
 
@@ -46,7 +46,9 @@ access credentials are required, which can be applied for `here`__. Once
 a client ID and a client secret key are obtained, they need to be added
 to the `client.json`__ file. An access token is also needed to download
 clips from Freesound. To obtain an access token, follow the instructions
-given `here`__. Note that an access token is only valid for 24 hours.
+given `here`__. Note that an access token is only valid for 24 hours. To
+use the API without request limitations, you may need to contact the
+Freesound developers.
 
 __ https://freesound.org/apiv2/apply
 __ client.json
@@ -108,15 +110,18 @@ Citing
 If you wish to cite this work, please cite the following paper:
 
 .. [1] \T. Iqbal, Y. Cao, A. Bailey, M. D. Plumbley, and W. Wang,
-       "ARCA23K: An audio dataset for investigating open-set label
-       noise," arXiv preprint arXiv:2109.09227, September 2021
+       “ARCA23K: An audio dataset for investigating open-set label
+       noise”, in Proceedings of the Detection and Classification of
+       Acoustic Scenes and Events 2021 Workshop (DCASE2021), 2021,
+       Barcelona, Spain, pp. 201–205.
 
 BibTeX::
 
-    @article{Iqbal2021,
-        author = {Iqbal, Turab and Cao, Yin and Bailey, Andrew and Plumbley, Mark D. and Wang, Wenwu},
-        title = {ARCA23K: An audio dataset for investigating open-set label noise},
-        journal = {arXiv preprint arXiv:2109.09227},
+    @inproceedings{Iqbal2021,
+        author = {Iqbal, T. and Cao, Y. and Bailey, A. and Plumbley, M. D. and Wang, W.},
+        title = {{ARCA23K}: An audio dataset for investigating open-set label noise},
+        booktitle = {Proceedings of the Detection and Classification of Acoustic Scenes and Events 2021 Workshop (DCASE2021)},
+        pages = {201--205},
         year = {2021},
-        month = {September},
+        address = {Barcelona, Spain},
     }
