@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 
 def main(args):
-    from extern.fsd import AudioSetOntology, FSD50K
+    from jaffadata.datasets import AudioSetOntology, FSD50K
 
     dataset_dir = args.work_dir / 'fsd50k'
     if not dataset_dir.is_dir():

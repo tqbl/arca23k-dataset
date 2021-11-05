@@ -6,10 +6,8 @@ from pathlib import Path
 def main(args):
     import nltk
     import pandas as pd
+    from jaffadata.datasets import AudioSetOntology
     from nltk.stem import WordNetLemmatizer
-
-    from extern.core.dataset import DataSubset
-    from extern.fsd import AudioSetOntology, Arca23K_FSD
 
     import retrieval
     import utils
@@ -17,10 +15,7 @@ def main(args):
 
     # Load metadata for FSD50K subset
     dataset_dir = args.work_dir / 'fsd50k'
-    dataset = Arca23K_FSD('', dataset_dir, args.work_dir / 'subset')
-    subset = DataSubset.concat([dataset['training'],
-                                dataset['validation'],
-                                dataset['test']])
+    subset = read_metadata(args.work_dir / 'subset')
 
     # Download NLTK resources
     nltk.download('stopwords')
@@ -30,12 +25,12 @@ def main(args):
     # Build vocabulary of relevant terms based on label set
     lemmatizer = ShortestLemmatizer(WordNetLemmatizer())
     ontology = AudioSetOntology('metadata/ontology.json')
-    vocab = retrieval.Vocabulary(dataset.label_set, ontology, lemmatizer)
+    label_set = sorted(subset.label.unique())
+    vocab = retrieval.Vocabulary(label_set, ontology, lemmatizer)
 
     # Load Freesound metadata
     entries = utils.load_freesound_metadata(args.work_dir / 'query')
-    index = pd.Index([int(index[:-4]) for index in subset.tags.index])
-    mask = entries.index.isin(index)
+    mask = entries.index.isin(subset.index)
     if args.evaluate:
         # Filter out entries that do not belong to FSD50K subset
         entries = entries[mask]
@@ -57,7 +52,7 @@ def main(args):
     else:
         # Discard classes that lack a sufficient number of matches
         sizes = results.groupby('prediction').size()
-        sizes2 = dataset['training'].tags.groupby('label').size()
+        sizes2 = subset[subset.train].groupby('label').size()
         ratios = sizes / (sizes2 + 3)  # margin=3 for headroom
         labels = ratios.index[ratios >= 1]
         results = results[results.prediction.isin(labels)]
@@ -68,12 +63,22 @@ def main(args):
             f.write('\n'.join(sorted(labels)))
 
 
+def read_metadata(metadata_dir):
+    import pandas as pd
+
+    df_train = pd.read_csv(metadata_dir / 'train.csv', index_col=0)
+    df_val = pd.read_csv(metadata_dir / 'val.csv', index_col=0)
+    df_test = pd.read_csv(metadata_dir / 'test.csv', index_col=0)
+    df = pd.concat([df_train, df_val, df_test])
+    df['train'] = df.index.isin(df_train.index)
+    return df
+
+
 def evaluate(results, subset):
     import pandas as pd
 
     # Combine ground truth and predictions into a single DataFrame
-    results.index = results.index.astype(str) + '.wav'
-    results = subset.tags.join(results)
+    results = subset.join(results)
     results = results[pd.notna(results.prediction)]
 
     accuracy = (results.label == results.prediction).mean()
