@@ -2,19 +2,20 @@ ARCA23K
 =======
 
 This is the software used to create the ARCA23K and ARCA23K-FSD
-datasets. A description of these datasets can be found on the `Zenodo
-page`__. Details of how the datasets were created can be found in our
-`DCASE2021 paper`__ [1]_.
+datasets. A description of these datasets, along with download links, can be
+found on the `Zenodo page`__. Details of how the datasets were created can be
+found in our `DCASE2021 paper`__ [1]_.
 
 Due to the mutable nature of the Freesound database (the source of the
 audio data), this software is unlikely to reproduce ARCA23K and
 ARCA23K-FSD exactly. Nevertheless, we hope this code can serve as a
 useful reference.
 
-The baseline system used to run experiments will be released soon.
+The source code for the baseline system can be found `here`__.
 
 __ https://zenodo.org/record/5117901
 __ https://arxiv.org/abs/2109.09227
+__ https://github.com/tqbl/arca23k-baseline
 
 
 .. contents::
